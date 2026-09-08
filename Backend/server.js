@@ -24,15 +24,7 @@ app.use("/todos", todoRoutes);
 
 
 
-//mySql connect coonection 
-connection.connect((err) => {
-    if(err) {
-        console.log("MySql is not successfully connected")
-    }
-    else {
-        console.log("MySql is successfully connected")
-    }
-})
+
 
 app.get('/', (Req,res)=> {
     res.send("Server is running")

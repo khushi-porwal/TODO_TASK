@@ -38,7 +38,7 @@ div{
   margin-bottom: 20px;
 }
 
-.todo-info{
+.task-info{
   display: flex;
   justify-content: space-between;
 }
