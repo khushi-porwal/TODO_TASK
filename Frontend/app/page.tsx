@@ -2,7 +2,16 @@
 
 import { useState, useEffect } from "react";
 
+import {
+  getTodos,
+  addTodo,
+  deleteTodo,
+  updateTodo
+} from "../api/todoApi";
+
+
 export default function Home() {
+
   const [title, setTitle] = useState("");
   const [todos, setTodos] = useState([]);
 
@@ -14,13 +23,11 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
 
-
   const getData = async () => {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5000/todos");
-      const data = await response.json();
+      const data = await getTodos();
 
       setTodos(data.data);
 
@@ -34,24 +41,15 @@ export default function Home() {
 
 
   const addTask = async () => {
+
     if (title.trim() == "") {
       setError("Please enter a task");
       return;
     }
 
     try {
-      await fetch("http://localhost:5000/todos", {
-        method: "POST",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          title: title,
-          status: "todo"
-        })
-      });
+      await addTodo(title);
 
       setError("");
       setTitle("");
@@ -59,48 +57,49 @@ export default function Home() {
       getData();
 
     } catch (error) {
+
       setError("Task not added");
+
     }
   };
 
 
   const deleteTask = async (id) => {
+
     try {
-      await fetch(`http://localhost:5000/todos/${id}`, {
-        method: "DELETE"
-      });
+
+      await deleteTodo(id);
 
       getData();
 
     } catch (error) {
+
       setError("Task not deleted");
+
     }
   };
 
 
   const updateTask = async (id) => {
+
     try {
-      await fetch(`http://localhost:5000/todos/${id}`, {
-        method: "PUT",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-          title: editTitle,
-          status: editStatus
-        })
-      });
+      await updateTodo(
+        id,
+        editTitle,
+        editStatus
+      );
 
       setEditTitle("");
       setEditStatus("");
-      setEditId("")
+      setEditId("");
 
       getData();
 
     } catch (error) {
+
       setError("Task not updated");
+
     }
   };
 
@@ -134,7 +133,6 @@ export default function Home() {
 
       {error && <p>{error}</p>}
 
-
       {loading && <p>Loading...</p>}
 
 
@@ -143,8 +141,10 @@ export default function Home() {
         <div className="todo-card" key={todo.id}>
 
           <div className="task-info">
+
             <p>{todo.title}</p>
             <p>{todo.status}</p>
+
           </div>
 
 
@@ -152,15 +152,20 @@ export default function Home() {
             Delete
           </button>
 
-          <button onClick={() => {
-            setEditId(todo.id)
-            setEditTitle(todo.title)
-            setEditStatus(todo.status)
-          }}>
+
+          <button
+            onClick={() => {
+              setEditId(todo.id);
+              setEditTitle(todo.title);
+              setEditStatus(todo.status);
+            }}
+          >
             Edit
           </button>
 
+
           {editId == todo.id && (
+
             <div className="update-section">
 
               <input
@@ -187,8 +192,8 @@ export default function Home() {
               </button>
 
             </div>
-          )}
 
+          )}
 
         </div>
 
