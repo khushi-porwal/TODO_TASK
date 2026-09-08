@@ -1,26 +1,49 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+main {
+  width: 600px;
+  margin: 50px auto;
+  padding: 20px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+h1{
+  text-align: center;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+input, select {
+  padding: 8px;
+  margin: 5px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+button{
+  padding: 8px 12px;
+  margin:5px;
+  cursor: pointer;
+}
+
+div{
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.todo-card{
+  border: 1px solid gray;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+.add-task {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.todo-info{
+  display: flex;
+  justify-content: space-between;
+}
+.update-section{
+  margin-top: 10px;
+  display:flex;
+  align-items: center;
 }
