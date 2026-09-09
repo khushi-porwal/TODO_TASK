@@ -1,4 +1,9 @@
 
+Create DATABASE todo_app_schema;
+
+use todo_app_schema;
+
+
 create table Todo(
 id INT UNIQUE auto_increment,
 title VARCHAR(50) NOT NULL,
